@@ -1,17 +1,19 @@
 {
-  "name": "vitest-sonar-code-coverage",
+  "name": "sonar-generic-code-coverage",
   "version": "1.0.0",
-  "description": "SonarQube Code Coverage Reporter for Vitest",
-  "main": "./lib/esm/index.js",
+  "description": "SonarQube Generic Code Coverage Reporter for Jest/Vitest",
+  "main": "./lib/cjs/index.js",
   "files": [
     "dist"
   ],
   "scripts": {
     "test": "vitest",
+    "build": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
     "tsc": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
     "prepublishOnly": "npm run tsc"
   },
   "keywords": [
+    "jest",
     "vitest",
     "vitest-reporter",
     "sonar",
@@ -21,33 +23,13 @@
   "author": "Thomas Garry",
   "license": "MIT",
   "devDependencies": {
-    "@types/debug": "^4.1.12",
     "@types/html-escaper": "^3.0.2",
     "@types/istanbul-lib-report": "^3.0.3",
-    "@types/istanbul-lib-source-maps": "^4.0.4",
-    "@types/istanbul-reports": "^3.0.4",
     "@types/node": "^20.10.5",
-    "@vitest/coverage-v8": "^1.0.4",
-    "typescript": "^5.3.3",
-    "vite": "^5.0.10",
-    "vitest": "^1.0.4"
-  },
-  "peerDependencies": {
-    "vitest": "^1.0.4"
+    "typescript": "^5.3.3"
   },
   "dependencies": {
-    "@ampproject/remapping": "^2.2.1",
-    "@bcoe/v8-coverage": "^0.2.2",
-    "debug": "^4.3.4",
-    "istanbul-lib-coverage": "^3.2.2",
-    "istanbul-lib-report": "^3.0.1",
-    "istanbul-lib-source-maps": "^4.0.1",
-    "istanbul-reports": "^3.1.6",
-    "magic-string": "^0.30.5",
-    "magicast": "^0.3.2",
-    "picocolors": "^1.0.0",
-    "std-env": "^3.7.0",
-    "test-exclude": "^6.0.0",
-    "v8-to-istanbul": "^9.2.0"
+    "html-escaper": "^3.0.3",
+    "istanbul-lib-report": "^3.0.1"
   }
 }

@@ -1,1 +1,1 @@
-export { default } from './SonarCodeCoverageProviderModule.js';
+export * from './sonarCodeCoverage.js';
