@@ -6,12 +6,12 @@ One use-case for this module is creating code coverage for svelte projects in So
 
 This module allows vitest to create the "Generic coverage" format that is associated with `sonar.coverageReportPaths`. You can combine the lcov output created via vitest with the generic code coverage format when sending reports to SonarQube.
 
-Do not use this module if your project is using only javascript/typescript! Use `sonar.javascript.lcov.reportPaths=coverage/lcov.info` as described in the documentation. The lcov option in vitest is all you need, as it's optimized for sonar, again this module should only be used for projects that have files unsupported by SonarQube.
+Do not use this module if your project is using only javascript/typescript! Use `sonar.javascript.lcov.reportPaths=coverage/lcov.info` as described in the documentation. The lcov option in vitest is all you need, as it's optimized for sonar, again this module should only be used for projects that have files unsupported by SonarQube. Look into sonar community docs before using this module.
 
 ## Installation
 
 ```bash
-npm install --save-dev vitest-sonar-code-coverage
+npm install --save-dev sonar-generic-code-coverage
 ```
 
 Add customProviderModule in your [`vite.config.ts`](https://vitest.dev/config/). The following also includes vitest-sonar-reporter, but this is not necessary:
@@ -24,9 +24,7 @@ export default defineConfig({
       coverage: {
         exclude: [...configDefaults.exclude],
         //@ts-ignore
-        reporter: ["json", "json-summary", "lcov", "cobertura"],
-        provider: "custom",
-        customProviderModule: "vitest-sonar-code-coverage",    // "src/SonarCodeCoverageProviderModule.ts" locally
+        reporter: ["json", "lcov", "cobertura", "sonar-generic-code-coverage"], // ../../../lib/cjs/sonarCodeCoverage.js locally
       },
       reporters: ["default", "vitest-sonar-reporter"],
       outputFile: {
@@ -38,10 +36,10 @@ export default defineConfig({
 
 ## Sonar
 
-Assuming you have both vitest-sonar-reporter and vitest-sonar-code-coverage, your sonar config may look like this:
+Assuming you have both vitest-sonar-reporter and sonar-generic-code-coverage, your sonar config may look like this:
 
 ```bash
 sonar.testExecutionReportPaths=coverage/sonar-report.xml
 # sonar.javascript.lcov.reportPaths=coverage/lcov.info     # include if javascript/typescript project
-sonar.coverageReportPaths=coverage/sonar-code-coverage.xml
+sonar.coverageReportPaths=coverage/sonar-coverage.xml
 ```
